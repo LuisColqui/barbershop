@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.barbershop.repo.IGenericRepo;
 import com.example.barbershop.service.ICRUD;
-
+import com.example.barbershop.exception.ModelNotFoundException;
 public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
 
 
@@ -17,6 +17,7 @@ public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
 
     @Override
     public T update(ID id, T t) {
+        getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND: " + id));
         return getRepo().save(t);
     }
 
@@ -27,7 +28,7 @@ public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
 
     @Override
     public T findById(ID id) {
-        return getRepo().findById(id).orElse(null);
+        return getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND: " + id));
     }
 
     @Override
