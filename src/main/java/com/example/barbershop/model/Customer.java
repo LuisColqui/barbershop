@@ -1,5 +1,6 @@
 package com.example.barbershop.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,11 +18,21 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idCustomer;
+
+    @Column(nullable = false, length = 50)
     private String firstName;
+
+    @Column(nullable = false, length = 50)
     private String lastName;
+
+    @Column(nullable = false)
     private String dni;
+
+    @Column(nullable = false)
     private Integer age;
+
+    @Column(nullable = false)
     private Boolean status;
 
 }
